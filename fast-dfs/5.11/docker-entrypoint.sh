@@ -8,8 +8,9 @@ if [ "$1" = "monitor" ] ; then
   exit 0
 elif [ "$1" = "storage" ] ; then
   FASTDFS_MODE="storage"
-  # 安装fastdfs-nginx-module
+  # 安装fastdfs-nginx-module  TODO
 else
+  # 安装nginx模块 TODO
   FASTDFS_MODE="tracker"
 fi
 
@@ -18,7 +19,7 @@ if [ -n "$PORT" ] ; then
 sed -i "s|^port=.*$|port=${PORT}|g" /etc/fdfs/"$FASTDFS_MODE".conf
 fi
 
-# 覆写storage的tracker地址,如果多个，分割逗号，写多个
+# 覆写storage的tracker地址,如果多个，分割逗号，写多个 TODO
 if [ -n "$TRACKER_SERVER" ] ; then
 
 sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/storage.conf
@@ -33,7 +34,7 @@ sed -i "s|group_name=.*$|group_name=${GROUP_NAME}|g" /etc/fdfs/storage.conf
 
 fi
 
-# 覆写storage的http_domain (TODO)
+# 覆写storage的http_domain TODO
 
 
 # 日志和数据存储位置

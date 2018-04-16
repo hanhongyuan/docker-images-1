@@ -1,28 +1,25 @@
 version: "3"
 services:
-  app:
-    image: "xxl-job-admin:1.9.1"
-    build:
-      context: ./1.9.1/app
-      dockerfile: Dockerfile
+  job-admin:
+    image: "docker.cplh.com/swarm_chaos/xxl-job-admin:1.9.1"
+    deploy:
+      replicas: 2
     ports:
-      - "8010:8080"
+      - "10011:8080"
     networks:
-      - db
+      - my-net
     depends_on:
-      - mysql
-  mysql:
-    image: "xxl-job-mysql:5.7"
-    build:
-      context: ./1.9.1/mysql
-      dockerfile: Dockerfile
+      - job-mysql
+  job-mysql:
+    image: "docker.cplh.com/swarm_chaos/xxl-job-mysql:5.7"
     networks:
-      - db
+      - my-net
     environment:
-      MYSQL_ROOT_PASSWORD: "rootyzf"
+      MYSQL_ROOT_PASSWORD: "1qaz@WSX"
     volumes:
       - mysql-data:/var/lib/mysql
 volumes:
   mysql-data:
 networks:
-  db:
+  my-net:
+    external: true
