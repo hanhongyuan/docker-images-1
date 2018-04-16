@@ -1,0 +1,28 @@
+version: "3"
+services:
+  app:
+    image: "xxl-job-admin:1.9.1"
+    build:
+      context: ./1.9.1/app
+      dockerfile: Dockerfile
+    ports:
+      - "8010:8080"
+    networks:
+      - db
+    depends_on:
+      - mysql
+  mysql:
+    image: "xxl-job-mysql:5.7"
+    build:
+      context: ./1.9.1/mysql
+      dockerfile: Dockerfile
+    networks:
+      - db
+    environment:
+      MYSQL_ROOT_PASSWORD: "rootyzf"
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
+networks:
+  db:
